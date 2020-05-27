@@ -147,6 +147,9 @@ export default {
     removeProduct(id) {
       if (confirm('Confirm product deletion')) {
         this.$store.commit('DELETE_PRODUCT', id)
+        if (this.page > this.pages) {
+          this.page = this.pages
+        }
       }
     }
   }
