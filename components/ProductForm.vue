@@ -50,7 +50,7 @@
 <script>
 const form = {
   title: '',
-  price: 0,
+  price: '',
   purchaseDate: ''
 }
 export default {

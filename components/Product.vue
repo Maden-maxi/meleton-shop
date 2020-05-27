@@ -83,7 +83,7 @@
 const form = {
   id: 0,
   title: '',
-  price: 0,
+  price: '',
   purchaseDate: ''
 }
 export default {
