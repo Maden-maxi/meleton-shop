@@ -24,7 +24,10 @@ export const mutations = {
   },
 
   CREATE_PRODUCT(state, product) {
-    state.products = state.products.concat(product)
+    state.products = state.products.concat({
+      ...product,
+      id: Math.floor(Math.random() * 1e10)
+    })
   },
 
   UPDATE_PRODUCT(state, product) {

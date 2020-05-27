@@ -1,10 +1,10 @@
 <template>
   <div class="row">
-    <div class="col">
+    <div class="col-12">
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <div class="row">
-            <div class="col-6">
+            <div class="col-6 d-flex">
               <paginate
                 v-model="page"
                 :page-count="pages"
@@ -19,6 +19,15 @@
                 prev-link-class="page-link"
                 next-link-class="page-link"
               ></paginate>
+              <div v-if="!addingMode">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  @click="addingMode = true"
+                >
+                  Add product
+                </button>
+              </div>
             </div>
             <div class="col-3">
               <select
@@ -41,6 +50,9 @@
                 <option value="asc">ASC</option>
                 <option value="desc">DESC</option>
               </select>
+            </div>
+            <div v-if="addingMode" class="col-12">
+              <ProductForm @add="addProduct" @cancel="addingMode = false" />
             </div>
           </div>
         </div>
@@ -67,6 +79,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Paginate from '~/components/Paginate.vue'
+import ProductForm from '~/components/ProductForm.vue'
 import Product from '~/components/Product.vue'
 
 function compareValues(key, order = 'asc') {
@@ -92,11 +105,13 @@ function compareValues(key, order = 'asc') {
 export default {
   components: {
     Paginate,
-    Product
+    Product,
+    ProductForm
   },
   data() {
     const page = +this.$route.query.page || 0
     return {
+      addingMode: false,
       page,
       orderBy: this.$route.query.orderBy || '',
       orderDirection: this.$route.query.orderDirection || ''
@@ -123,13 +138,16 @@ export default {
         }
       })
     },
+    addProduct(product) {
+      this.$store.commit('CREATE_PRODUCT', product)
+    },
+    updateProduct(product) {
+      this.$store.commit('UPDATE_PRODUCT', product)
+    },
     removeProduct(id) {
       if (confirm('Confirm product deletion')) {
         this.$store.commit('DELETE_PRODUCT', id)
       }
-    },
-    updateProduct(product) {
-      this.$store.commit('UPDATE_PRODUCT', product)
     }
   }
 }

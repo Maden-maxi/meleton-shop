@@ -55,7 +55,7 @@
       <button
         v-if="editMode"
         type="button"
-        class="btn btn-default"
+        class="btn btn-secondary"
         @click="toggleEditMode(false)"
       >
         Cancel
