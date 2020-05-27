@@ -97,7 +97,6 @@ export default {
   methods: {
     toggleEditMode(mode) {
       this.editMode = mode
-      console.log(this.product)
       Object.keys(form).forEach((key) => {
         if (key === 'purchaseDate') {
           this[key] = this.$options.filters.date(

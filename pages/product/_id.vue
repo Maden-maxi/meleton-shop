@@ -1,6 +1,7 @@
 <template>
   <div class="row">
     <div v-if="product" class="col">
+      <nuxt-link :to="'/'" class="btn btn-primary">Go to list</nuxt-link>
       <Product
         :product="product"
         @remove="removeProduct"
